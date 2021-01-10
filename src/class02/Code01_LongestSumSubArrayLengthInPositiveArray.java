@@ -1,5 +1,12 @@
 package class02;
 
+/**
+ * 累加和问题1
+ * 给定一个正整数的数字arr[], 和一个K值，请子数组的累加和刚好等于K的最长子数组的长度len
+ *
+ * 例如：arr[] = [1,2,3,5,3,3,1]   K = 6
+ * 那么输出就是3 ，即[1,2,3]数组的累加，其数组长度为3。.虽然[3,3]的累加也==6，但他的长度只为2
+ */
 public class Code01_LongestSumSubArrayLengthInPositiveArray {
 
 	public static int getMaxLength(int[] arr, int K) {
