@@ -1,7 +1,21 @@
 package class02;
 
 import java.util.HashMap;
-
+/**
+ * 累加和问题２
+ * 给定一个负数，0,正整数的数字arr[], 和一个K值，请子数组的累加和刚好等于K的最长子数组的长度len
+ *
+ * 例如：arr[] = [1,2,3,-1,0,1, 5,3,3,1]   K = 6
+ * 那么输出就是3 ，即[1,2,3, -1,0,1,]数组的累加，其数组长度为6。.虽然[3,3]的累加也==6，但他的长度只为2
+ *
+ * 题解：1.遍历一遍，算出所有的累加和
+ *       2. map 记录累加和第一次出现的位置，注意：必须补(0,-1)的值
+ *       3.遍历一遍，用k-sum[i] 去查看map中是否有值
+ *            a. 有： len = Math.max(i - map.get(sum - k), len)
+ *            b. 没有： map.put(sum, i);
+ *
+ *  应用： 525. 连续数组 就是这个题的应用
+ */
 public class Code02_LongestSumSubArrayLength {
 
 	public static int maxLength(int[] arr, int k) {

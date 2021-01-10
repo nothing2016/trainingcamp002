@@ -6,6 +6,8 @@ package class02;
  *
  * 例如：arr[] = [1,2,3,5,3,3,1]   K = 6
  * 那么输出就是3 ，即[1,2,3]数组的累加，其数组长度为3。.虽然[3,3]的累加也==6，但他的长度只为2
+ *
+ * 题解：因为是正整数，所以具备单调性，使用滑动窗口即可
  */
 public class Code01_LongestSumSubArrayLengthInPositiveArray {
 

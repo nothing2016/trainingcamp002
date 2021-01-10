@@ -1,5 +1,20 @@
 package class02;
 
+/**
+ * 累加和问题3
+ * 给定一个负数，0,正整数的数字arr[], 和一个K值，请子数组的累加和小于等于K的最长子数组的长度len
+ *
+ * 例如：arr[] = [1,2,3,-1,0,1,-1 5,3,3,1]   K = 6
+ * 那么输出就是3 ，即[1,2,3, -1,0,1,-1]数组的累加和为5，其数组长度为6 ,符合<=6。.虽然[3,3]的累加也==6，但他的长度只为2
+ *
+ * 题解：1.先求两个辅助的数组
+ *         int[] minSums = new int[arr.length];表以当前i点为起点，其最小累加和为多少
+ * 		   int[] minSumEnds = new int[arr.length];表以当前i点为起点，其最小累加和的最后一个位置的下标
+ *
+ *       2.遍历一遍，找到结果，解析过程看代码的解释
+ *
+ *
+ */
 public class Code03_LongestLessSumSubArrayLength {
 
 	public static int maxLengthAwesome(int[] arr, int k) {
@@ -31,10 +46,20 @@ public class Code03_LongestLessSumSubArrayLength {
 			// 2) 如果以i开头的情况下，累加和<=k的最长子数组比arr[i..end-1]短，更新还是不更新res都不会影响最终结果；
 			while (end < arr.length && sum + minSums[end] <= k) {
 				sum += minSums[end];
-				end = minSumEnds[end] + 1;
 			}
 			res = Math.max(res, end - i);
 			if (end > i) { // 窗口内还有数 [i~end) [4,4)
+
+				/**
+				 * 这里有一个忽略的原则 比如
+				 * arr        = [5,-1,-2,1,4,5]
+				 * minSums    = [2,-3,-2,1,4,5]
+				 * minSumEnds = [2, 2, 2,3,4,5]
+				 *
+				 * i =0 位置的5的最小和位置2是覆盖了 -1和-2位置的最小值end值的 -> [2, 2, 2
+				 * 所以放弃小范围的[-1,-2]，直接让sum-=arr[i],下一次i++,忽略[-1,-2]的长度2没有任何的问题
+				 * 这也就是能加  速的原因
+				 */
 				sum -= arr[i];
 			} else { // 窗口内已经没有数了，说明从i开头的所有子数组累加和都不可能<=k
 				end = i + 1;
